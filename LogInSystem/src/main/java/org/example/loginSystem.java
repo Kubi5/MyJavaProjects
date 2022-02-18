@@ -22,7 +22,7 @@ public class loginSystem {
            }
            while(chosen_number != 1 && chosen_number != 2);
         }
-
+        // TODO: ZROBIC COS ZEBY KONSOLA SIE CZYSCILA PO WYBORACH
         public void runProgram() throws SQLException {
             if(chosen_number == 1){
                 System.out.print("\033[H\033[2J");
