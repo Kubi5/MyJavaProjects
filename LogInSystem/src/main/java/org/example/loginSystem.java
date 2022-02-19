@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class loginSystem {
     int chosen_number;
         public void Welcome(){
-            System.out.println("==========  Welcome on our www website!  ==========\n");
+            System.out.println("\n==========  Welcome on our www website!  ==========\n");
             System.out.println("(type 1) to LOG IN");
             System.out.println("(type 2) to Register if you do not have an account");
         }

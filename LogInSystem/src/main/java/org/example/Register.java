@@ -35,5 +35,6 @@ public class Register {
         } while(!password.equals(passwordConfirm) || !passwordValid);
 
         dataBaseConnection.addingNewClient(email,password);
+        System.out.println("== Your account has been created!! ==");
     }
 }
