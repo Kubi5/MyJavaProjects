@@ -34,7 +34,10 @@ public class Register {
             if(!password.equals(passwordConfirm)) System.out.println("Passwords must be the same!");
         } while(!password.equals(passwordConfirm) || !passwordValid);
 
-        dataBaseConnection.addingNewClient(email,password);
-        System.out.println("== Your account has been created!! ==");
+        if(!dataBaseConnection.isMailInDatabase(email)) {
+            dataBaseConnection.addingNewClient(email, password);
+            System.out.println("== Your account has been created!! ==");
+        }
+        else System.out.println("== This account is already in database! ==");
     }
 }

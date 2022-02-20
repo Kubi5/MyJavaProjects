@@ -26,23 +26,38 @@ public class DataBaseConnection {
     }
 
     // TODO: DODAC OPCJE ZE EMAIL JEST ALE HASLO ZLE
+    //RETURNING 0 if there is not acc in database, 1 when the password is wrong, 2 its fine
     public int isAccountValid(String email_, String password_) throws SQLException {
         Connection connection = DriverManager.getConnection(jdbcURL, username, this.password);
-        Hashtable<String, String> dataDict = new Hashtable<String, String>();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM dane_klientow");
-        while (resultSet.next()) {
-            int id = resultSet.getInt("clientID");
-            String email = resultSet.getString("email");
-            if(email.equals(email_)){
-                String password = resultSet.getString("password");
-                if(password.equals(password_)){
-                    return 1;
-                }
-            }
+        ResultSet resultSet = statement.executeQuery("SELECT email,password FROM dane_klientow");
 
+        while (resultSet.next()) {
+            //int id = resultSet.getInt("clientID");
+            String email = resultSet.getString("email");
+            if (email.equals(email_)) {
+                String password = resultSet.getString("password");
+                if (password.equals(password_)) {
+                    return 2; //GOOD PASSWORD
+                }
+                return 1; //WRONG PASSWORD
+            }
         }
-        return 0;
+
+        return 0; // NO ACCOUNT IN DATABASE
+    }
+    // TODO: CZY DANY MAIL JEST JUZ W BAZIE? NIE DODAWAJ NOWEGO KONTA!
+    public boolean isMailInDatabase(String email_) throws SQLException {
+        Connection connection = DriverManager.getConnection(jdbcURL, username, this.password);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT email FROM dane_klientow");
+        while (resultSet.next()) {
+            String email = resultSet.getString("email");
+            if (email.equals(email_)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void TestingDatabase() throws SQLException {

@@ -15,13 +15,15 @@ public class LogIn {
         email = scanner.nextLine();
         System.out.println("Password: ");
         password = scanner.nextLine();
-        // TODO: DODAC TU OPCJE ZE KONTO JEST ALE ZLE HASLO TYLKO
+
         int value = dataBaseConnection.isAccountValid(email,password);
-        if(value == 1){
-            System.out.println("You have logged succesfuly");
-        }
-        if(value == 0){
-            System.out.println("You typed wrong data");
+        switch(value) {
+            case 0: System.out.println("You have provided wrong data, try again!");
+            break;
+            case 1: System.out.println("Wrong password! Try again");
+            break;
+            case 2: System.out.println("ITS FINE");
+            break;
         }
     }
 }
